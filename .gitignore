@@ -1,0 +1,33 @@
+# Dependências
+node_modules/
+.pnp
+.pnp.*
+
+# Builds e Saídas de Compilação
+dist/
+out/
+build/
+.next/
+.electron/
+TalkGenius-*/
+*.app
+*.dmg
+*.exe
+*.zip
+
+# Logs e Debug
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Configurações Privadas e Variáveis de Ambiente (API Keys)
+config.json
+.env*
+
+# Arquivos de Sistema e Mídia
+.DS_Store
+*.webm
+.vercel
+

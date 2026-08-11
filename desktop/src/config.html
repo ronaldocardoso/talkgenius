@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Configuração — TalkGenius</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b, #09090b 60%);
+      color: #f4f4f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      background: rgba(15, 15, 23, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(139, 92, 246, 0.15);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                  0 0 50px rgba(139, 92, 246, 0.05);
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      background: linear-gradient(135deg, #a78bfa, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #a1a1aa;
+      font-weight: 400;
+    }
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    input, select, textarea {
+      background: rgba(24, 24, 37, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 11px 14px;
+      color: #f4f4f5;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s ease;
+      font-family: inherit;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 10px rgba(139, 92, 246, 0.2);
+      background: rgba(30, 30, 46, 0.9);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #52525b;
+    }
+
+    select option {
+      background: #181825;
+      color: #f4f4f5;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 65px;
+      max-height: 120px;
+      line-height: 1.5;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 2px;
+    }
+
+    .badge {
+      font-size: 11px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #d4d4d8;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .badge:hover {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: rgba(139, 92, 246, 0.4);
+      color: #c084fc;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #71717a;
+      margin-top: 1px;
+    }
+
+    .hint a {
+      color: #a78bfa;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .hint a:hover {
+      color: #c084fc;
+      text-decoration: underline;
+    }
+
+    button {
+      margin-top: 8px;
+      padding: 13px;
+      background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+    }
+
+    button:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(139, 92, 246, 0.35);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .error {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      display: none;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">🎙 TalkGenius</div>
+      <div class="subtitle">Copiloto de Entrevistas Inteligente</div>
+    </div>
+
+    <div class="form">
+      <div class="field">
+        <label>Gemini API Key</label>
+        <input type="password" id="apiKey" placeholder="Coloque sua chave do Gemini aqui..." />
+        <div class="hint">Obtenha gratuitamente no <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a></div>
+      </div>
+
+      <div class="field">
+        <label>Modelo da IA</label>
+        <select id="model">
+          <option value="gemini-2.0-flash">⚡ Gemini 2.0 Flash (Super Rápido & Recomendado)</option>
+          <option value="gemini-1.5-pro">🧠 Gemini 1.5 Pro (Avançado - Resposta Inteligente)</option>
+          <option value="gemini-1.5-flash">🚀 Gemini 1.5 Flash (Estável)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Idioma da Entrevista</label>
+        <select id="language">
+          <option value="pt">🇧🇷 Português</option>
+          <option value="en">🇺🇸 Inglês</option>
+          <option value="es">🇪🇸 Espanhol</option>
+          <option value="it">🇮🇹 Italiano</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Vaga / Cargo</label>
+        <input type="text" id="role" placeholder="ex: Senior Frontend Developer" />
+        <div class="badges">
+          <span class="badge" onclick="fillRole('Frontend Developer')">Frontend Dev</span>
+          <span class="badge" onclick="fillRole('UX/UI Designer')">UX/UI Design</span>
+          <span class="badge" onclick="fillRole('Product Manager')">Product Manager</span>
+          <span class="badge" onclick="fillRole('Software Engineer')">Software Engineer</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Seu Perfil / Mini-Currículo (Opcional)</label>
+        <textarea id="resume" placeholder="Ex: Desenvolvedor Front-end com 5 anos de experiência em React, TypeScript e Tailwind. Foco em acessibilidade e performance..."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Descrição da Vaga / Requisitos (Opcional)</label>
+        <textarea id="jobDesc" placeholder="Cole aqui os detalhes da vaga para que as respostas usem as palavras-chave adequadas da descrição."></textarea>
+      </div>
+
+      <div class="error" id="error"></div>
+
+      <button id="startBtn">Iniciar Assistente →</button>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    const fs = require('fs');
+    const path = require('path');
+
+    // O arquivo config.json ficará salvo na raiz do projeto (config.html está em src/, então subimos um nível)
+    const configPath = path.join(__dirname, '..', 'config.json');
+
+    function fillRole(roleName) {
+      document.getElementById('role').value = roleName;
+    }
+
+    // Tenta carregar as configurações do arquivo config.json
+    let savedConfig = {};
+    if (fs.existsSync(configPath)) {
+      try {
+        const fileData = fs.readFileSync(configPath, 'utf8');
+        savedConfig = JSON.parse(fileData);
+        console.log('Configurações carregadas do config.json');
+      } catch (e) {
+        console.error('Falha ao ler o config.json, usando localStorage.', e);
+      }
+    }
+
+    // Fallback: se não achar no config.json, tenta ler do localStorage
+    if (!savedConfig.apiKey) {
+      const savedLocal = localStorage.getItem('ia_config');
+      if (savedLocal) {
+        try {
+          savedConfig = JSON.parse(savedLocal);
+          console.log('Configurações carregadas do localStorage (fallback)');
+        } catch (e) {}
+      }
+    }
+
+    // Preenche os campos se houver configurações salvas
+    if (savedConfig) {
+      if (savedConfig.apiKey) document.getElementById('apiKey').value = savedConfig.apiKey;
+      if (savedConfig.language) document.getElementById('language').value = savedConfig.language;
+      if (savedConfig.model) document.getElementById('model').value = savedConfig.model;
+      if (savedConfig.role) document.getElementById('role').value = savedConfig.role;
+      if (savedConfig.resume) document.getElementById('resume').value = savedConfig.resume;
+      if (savedConfig.jobDesc) document.getElementById('jobDesc').value = savedConfig.jobDesc;
+    }
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      const apiKey = document.getElementById('apiKey').value.trim();
+      const model = document.getElementById('model').value;
+      const language = document.getElementById('language').value;
+      const role = document.getElementById('role').value.trim();
+      const resume = document.getElementById('resume').value.trim();
+      const jobDesc = document.getElementById('jobDesc').value.trim();
+      const errorEl = document.getElementById('error');
+
+      errorEl.style.display = 'none';
+
+      if (!apiKey) {
+        errorEl.textContent = 'Por favor, insira sua Gemini API Key.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      if (apiKey.startsWith('sk-')) {
+        errorEl.textContent = 'A chave inserida começa com "sk-", o que indica ser uma chave da OpenAI. Por favor, substitua-a pela sua Gemini API Key (que começa com "AQ." ou "AIzaSy").';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // Preserva a dimensão da janela salva anteriormente (se houver)
+      const windowSize = savedConfig.windowSize || null;
+      const config = { apiKey, model, language, role, resume, jobDesc, windowSize };
+
+      // Salva no localStorage para redundância
+      localStorage.setItem('ia_config', JSON.stringify(config));
+
+      // Salva fisicamente no config.json na raiz do projeto
+      try {
+        fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf8');
+        console.log('Configurações salvas no config.json com sucesso!');
+      } catch (e) {
+        console.error('Falha ao escrever config.json', e);
+      }
+
+      ipcRenderer.send('start-assistant', config);
+    });
+  </script>
+</body>
+</html>

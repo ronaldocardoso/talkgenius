@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: transparent;
+      user-select: none;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* 100% SÓLIDO - ZERO TRANSPARÊNCIA */
+    .overlay {
+      background: #0a0a12;
+      border: 1.5px solid rgba(139, 92, 246, 0.45);
+      border-top: 1.5px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 12px 14px 8px;
+      margin: 6px;
+      height: calc(100vh - 12px);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.95),
+                  0 0 25px rgba(139, 92, 246, 0.2);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      outline: none;
+      cursor: default;
+    }
+
+    .overlay.recording {
+      border-color: rgba(239, 68, 68, 0.8);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.95),
+                  0 0 35px rgba(239, 68, 68, 0.4);
+    }
+
+    .overlay.processing {
+      border-color: rgba(245, 158, 11, 0.8);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.95),
+                  0 0 35px rgba(245, 158, 11, 0.4);
+    }
+
+    /* Topbar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #71717a;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .dot.listening { 
+      background: #ef4444; 
+      animation: pulse 1.2s infinite; 
+    }
+    .dot.processing { 
+      background: #f59e0b; 
+      animation: pulse 0.6s infinite; 
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.1); }
+    }
+
+    .status {
+      font-size: 11px;
+      color: #a1a1aa;
+      font-weight: 500;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #waveform {
+      width: 130px;
+      height: 20px;
+      background: transparent;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 6px;
+      margin-left: auto;
+      align-items: center;
+    }
+
+    .btn {
+      background: #1e1e2d;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      color: #d4d4d8;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 4px 10px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-family: inherit;
+      outline: none;
+    }
+    .btn:hover { 
+      background: #27273a; 
+      color: #ffffff; 
+      border-color: rgba(255,255,255,0.3);
+    }
+    
+    .btn.record-btn {
+      background: #2e1065;
+      border-color: #7c3aed;
+      color: #d8b4fe;
+    }
+    .btn.record-btn:hover {
+      background: #3b0764;
+      border-color: #8b5cf6;
+      color: #f3e8ff;
+    }
+    .btn.record-btn.active {
+      background: #7f1d1d;
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    /* Section Boxes - 100% SÓLIDOS E CLICÁVEIS PARA ARRASTE DE JANELA */
+    .section-box {
+      background: #12131f;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-top: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 10px;
+      padding: 8px 12px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-box {
+      flex-shrink: 0;
+      height: 90px;
+      max-height: 220px;
+      min-height: 50px;
+      background: #121426;
+      border-color: rgba(129, 140, 248, 0.35);
+      overflow: hidden;
+    }
+
+    .box-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .box-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .question-box .box-title {
+      color: #818cf8;
+    }
+
+    .transcript {
+      font-size: 12.5px;
+      color: #a1a1aa;
+      line-height: 1.45;
+      font-style: italic;
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 4px;
+    }
+
+    .transcript::-webkit-scrollbar {
+      width: 4px;
+    }
+    .transcript::-webkit-scrollbar-thumb {
+      background: rgba(129, 140, 248, 0.4);
+      border-radius: 2px;
+    }
+
+    .transcript span.text { 
+      color: #ffffff; 
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    .transcript .placeholder {
+      color: #71717a;
+      font-style: italic;
+    }
+
+    /* Divisória Vertical Redimensionável (Vertical Splitter) */
+    .v-divider {
+      height: 10px;
+      margin: -2px 0;
+      cursor: ns-resize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      user-select: none;
+      flex-shrink: 0;
+    }
+    .divider-handle-line {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(192, 132, 252, 0.4);
+      transition: background 0.2s ease, width 0.2s ease;
+    }
+    .v-divider:hover .divider-handle-line {
+      background: rgba(192, 132, 252, 0.95);
+      width: 56px;
+    }
+
+    /* Answer Box (Ocupa todo o resto do espaço vertical) */
+    .answer-box {
+      flex: 1;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      background: #16122c;
+      border-color: rgba(139, 92, 246, 0.4);
+      overflow: hidden;
+    }
+
+    .answer {
+      font-size: 13.5px;
+      color: #ffffff;
+      line-height: 1.6;
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 6px;
+      user-select: text;
+    }
+
+    .answer::-webkit-scrollbar {
+      width: 5px;
+    }
+    .answer::-webkit-scrollbar-track {
+      background: #09090e;
+    }
+    .answer::-webkit-scrollbar-thumb {
+      background: #7c3aed;
+      border-radius: 3px;
+    }
+    .answer::-webkit-scrollbar-thumb:hover {
+      background: #8b5cf6;
+    }
+
+    .answer.placeholder {
+      color: #71717a;
+      font-style: italic;
+      font-size: 13px;
+    }
+
+    .answer.loading {
+      color: #c084fc;
+      display: flex;
+      align-items: center;
+    }
+
+    .copy-btn {
+      background: #2e1065;
+      border: 1px solid #7c3aed;
+      color: #d8b4fe;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+      display: none;
+    }
+    .copy-btn:hover {
+      background: #3b0764;
+      border-color: #8b5cf6;
+      color: #ffffff;
+    }
+    .copy-btn.active {
+      background: #14532d;
+      border-color: #22c55e;
+      color: #86efac;
+      display: inline-flex !important;
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 4px;
+      align-items: center;
+      padding: 6px 0;
+    }
+    .typing-dots span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c084fc;
+      animation: typing 1.2s infinite;
+    }
+    .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+
+    .footer-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      padding: 0 2px;
+    }
+
+    .shortcut-hint {
+      font-size: 10px;
+      color: #a1a1aa;
+    }
+
+    kbd {
+      background: #27273a;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 9.5px;
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Resize Handle canto inferior direito */
+    .resize-handle {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 26px;
+      height: 26px;
+      cursor: se-resize;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 4px;
+      z-index: 9999;
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+    .resize-handle:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay" id="overlay" tabindex="0">
+    <div class="topbar">
+      <div class="dot" id="dot"></div>
+      <div class="status" id="status">Pronto — aperte ESPAÇO ou F8 para gravar</div>
+      
+      <!-- Real-time Visualizer Waveform -->
+      <canvas id="waveform"></canvas>
+
+      <div class="controls">
+        <button class="btn record-btn" id="recordBtn">⏺ Gravar</button>
+        <button class="btn" id="clearBtn">Limpar</button>
+        <button class="btn" id="reconfigBtn">⚙</button>
+        <button class="btn" id="quitBtn">✕</button>
+      </div>
+    </div>
+
+    <!-- Question Box -->
+    <div class="section-box question-box" id="questionBox">
+      <div class="box-header">
+        <div class="box-title">
+          <span>🎙 PERGUNTA DO ENTREVISTADOR</span>
+        </div>
+      </div>
+      <div class="transcript" id="transcript">
+        <span class="placeholder">Aguardando pergunta do entrevistador...</span>
+      </div>
+    </div>
+
+    <!-- Divisória Ajustável entre Pergunta e Resposta -->
+    <div class="v-divider" id="vDivider" title="Arraste para cima ou para baixo para ajustar a divisão">
+      <div class="divider-handle-line"></div>
+    </div>
+
+    <!-- Answer Box -->
+    <div class="section-box answer-box" id="answerBox">
+      <div class="box-header">
+        <div class="box-title">
+          <span>💡 SUGESTÃO DE RESPOSTA</span>
+        </div>
+        <button class="btn copy-btn" id="copyBtn">📋 Copiar</button>
+      </div>
+      <div class="answer placeholder" id="answer">
+        Sua resposta sugerida aparecerá aqui...
+      </div>
+    </div>
+
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+      <div class="shortcut-hint">
+        Arraste a tela de qualquer ponto &nbsp;·&nbsp; <kbd>Espaço</kbd> ou <kbd>F8</kbd> ou <kbd>Option+Espaço</kbd> gravar &nbsp;·&nbsp; <kbd>Esc</kbd> limpar
+      </div>
+    </div>
+
+    <!-- Drag-resize Handle Icon -->
+    <div id="resize-handle" class="resize-handle" title="Arraste no canto para redimensionar a janela">
+      <svg width="12" height="12" viewBox="0 0 12 12">
+        <line x1="12" y1="2" x2="2" y2="12" stroke="rgba(192, 132, 252, 0.9)" stroke-width="1.8" stroke-linecap="round" />
+        <line x1="12" y1="6" x2="6" y2="12" stroke="rgba(192, 132, 252, 0.9)" stroke-width="1.8" stroke-linecap="round" />
+        <line x1="12" y1="10" x2="10" y2="12" stroke="rgba(192, 132, 252, 0.9)" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+
+    let config = {};
+    let mediaRecorder = null;
+    let audioChunks = [];
+    let isRecording = false;
+    let isStartingRecording = false;
+    let conversationHistory = [];
+
+    // Lógica do visualizador
+    let audioCtx = null;
+    let analyser = null;
+    let animationId = null;
+
+    const overlay = document.getElementById('overlay');
+    const dot = document.getElementById('dot');
+    const status = document.getElementById('status');
+    const transcriptEl = document.getElementById('transcript');
+    const answerEl = document.getElementById('answer');
+    const recordBtn = document.getElementById('recordBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const canvas = document.getElementById('waveform');
+    const canvasCtx = canvas.getContext('2d');
+    const questionBox = document.getElementById('questionBox');
+    const vDivider = document.getElementById('vDivider');
+
+    // Variáveis de controle de streaming
+    let fullText = '';
+    let currentTranscript = '';
+    let currentAnswer = '';
+
+    // Ajusta a resolução inicial do canvas
+    canvas.width = 130;
+    canvas.height = 20;
+
+    // Foco automático inicial na janela
+    setTimeout(() => {
+      overlay.focus();
+    }, 150);
+
+    // Carrega altura salva da caixa da pergunta (padrão 90px)
+    const savedQHeight = localStorage.getItem('questionBoxHeight');
+    if (savedQHeight) {
+      questionBox.style.height = `${savedQHeight}px`;
+    }
+
+    // Recebe config do main
+    ipcRenderer.on('init', (event, cfg) => {
+      config = cfg;
+      const langLabel = {
+        'pt': '🇧🇷 Português',
+        'en': '🇺🇸 Inglês',
+        'es': '🇪🇸 Espanhol',
+        'it': '🇮🇹 Italiano'
+      }[cfg.language] || '🇧🇷 Português';
+      
+      const modelLabel = cfg.model === 'gemini-1.5-pro' ? '🧠 Pro' : '⚡ Flash';
+      status.textContent = `${langLabel} (${modelLabel}) · Pronto`;
+    });
+
+    // Escuta comandos de atalhos globais vindos do processo principal
+    ipcRenderer.on('toggle-recording-global', () => {
+      toggleRecording();
+    });
+
+    ipcRenderer.on('clear-all-global', () => {
+      clearAll();
+    });
+
+    // Botões de navegação
+    document.getElementById('quitBtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.blur();
+      ipcRenderer.send('quit');
+    });
+    document.getElementById('reconfigBtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.blur();
+      ipcRenderer.send('reconfig');
+    });
+    document.getElementById('clearBtn').addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.blur();
+      clearAll();
+    });
+    recordBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.blur();
+      toggleRecording();
+    });
+    copyBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      this.blur();
+      copyAnswer();
+    });
+
+    // ARRASTE DA JANELA 100% VIA JAVASCRIPT EM QUALQUER PONTO (SEM CONFLITO DE TECLADO)
+    let isMouseDraggingWindow = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
+    overlay.addEventListener('mousedown', (e) => {
+      overlay.focus();
+      ipcRenderer.send('focus-window');
+
+      // Ignora se o usuário clicou em botões, texto selecionável, divisória ou handle de resize
+      if (e.target.closest('.controls') || 
+          e.target.closest('#resize-handle') || 
+          e.target.closest('#vDivider') || 
+          e.target.closest('.copy-btn') || 
+          e.target.closest('.btn') ||
+          e.target.closest('.answer')) {
+        return;
+      }
+
+      isMouseDraggingWindow = true;
+      dragStartX = e.screenX;
+      dragStartY = e.screenY;
+
+      function onMouseMove(e) {
+        if (!isMouseDraggingWindow) return;
+        const deltaX = e.screenX - dragStartX;
+        const deltaY = e.screenY - dragStartY;
+        dragStartX = e.screenX;
+        dragStartY = e.screenY;
+        ipcRenderer.send('move-window-by', { deltaX, deltaY });
+      }
+
+      function onMouseUp() {
+        isMouseDraggingWindow = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', onMouseUp);
+      }
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    // DIVISÓRIA VERTICAL REDIMENSIONÁVEL ENTRE PERGUNTA E RESPOSTA
+    vDivider.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startY = e.screenY;
+      const startHeight = questionBox.getBoundingClientRect().height;
+
+      function onDividerMove(e) {
+        const deltaY = e.screenY - startY;
+        const newHeight = Math.max(50, Math.min(220, Math.round(startHeight + deltaY)));
+        questionBox.style.height = `${newHeight}px`;
+      }
+
+      function onDividerUp() {
+        document.removeEventListener('mousemove', onDividerMove);
+        document.removeEventListener('mouseup', onDividerUp);
+        localStorage.setItem('questionBoxHeight', questionBox.getBoundingClientRect().height);
+      }
+
+      document.addEventListener('mousemove', onDividerMove);
+      document.addEventListener('mouseup', onDividerUp);
+    });
+
+    // ATALHO DE TECLADO (Espaço / F8 / F9 = Toggle Gravação, Esc = Limpar)
+    window.addEventListener('keydown', (e) => {
+      const active = document.activeElement;
+      if (active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA')) {
+        return;
+      }
+
+      if (e.key === 'Escape' || e.code === 'Escape') {
+        e.preventDefault();
+        clearAll();
+        return;
+      }
+
+      if (e.key === ' ' || e.code === 'Space' || e.key === 'F8' || e.key === 'F9') {
+        if (e.repeat) return; // Evita disparos repetidos se segurar a tecla
+        e.preventDefault();
+        toggleRecording();
+      }
+    }, true);
+
+    // Redimensionamento da janela no canto inferior direito
+    const resizeHandle = document.getElementById('resize-handle');
+
+    resizeHandle.addEventListener('mousedown', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const startX = e.screenX;
+      const startY = e.screenY;
+      const startWidth = window.outerWidth;
+      const startHeight = window.outerHeight;
+
+      function handleMouseMove(e) {
+        const deltaX = e.screenX - startX;
+        const deltaY = e.screenY - startY;
+
+        const newWidth = Math.max(480, Math.round(startWidth + deltaX));
+        const newHeight = Math.max(260, Math.round(startHeight + deltaY));
+
+        ipcRenderer.send('resize-window-live', { width: newWidth, height: newHeight });
+      }
+
+      function handleMouseUp() {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+
+        ipcRenderer.send('save-window-size', {
+          width: window.outerWidth,
+          height: window.outerHeight
+        });
+      }
+
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    });
+
+    function clearAll() {
+      transcriptEl.innerHTML = '<span class="placeholder">Aguardando pergunta do entrevistador...</span>';
+      answerEl.textContent = 'Sua resposta sugerida aparecerá aqui...';
+      answerEl.className = 'answer placeholder';
+      copyBtn.style.display = 'none';
+      copyBtn.textContent = '📋 Copiar';
+      copyBtn.classList.remove('active');
+      dot.className = 'dot';
+      overlay.className = 'overlay';
+      
+      const langLabel = {
+        'pt': '🇧🇷 Português',
+        'en': '🇺🇸 Inglês',
+        'es': '🇪🇸 Espanhol',
+        'it': '🇮🇹 Italiano'
+      }[config.language] || '🇧🇷 Português';
+      
+      const modelLabel = config.model === 'gemini-1.5-pro' ? '🧠 Pro' : '⚡ Flash';
+      status.textContent = `${langLabel} (${modelLabel}) · Pronto — aperte ESPAÇO para gravar`;
+      
+      fullText = '';
+      currentTranscript = '';
+      currentAnswer = '';
+    }
+
+    async function toggleRecording() {
+      if (isRecording) {
+        stopRecording();
+      } else {
+        startRecording();
+      }
+    }
+
+    async function startRecording() {
+      if (isRecording || isStartingRecording) return;
+      isStartingRecording = true;
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioChunks = [];
+        mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) audioChunks.push(e.data);
+        };
+
+        mediaRecorder.onstop = async () => {
+          stream.getTracks().forEach(t => t.stop());
+          stopWaveform();
+          await processAudio();
+        };
+
+        mediaRecorder.start();
+        isRecording = true;
+        isStartingRecording = false;
+        
+        // Estilo de gravação
+        dot.className = 'dot listening';
+        overlay.classList.add('recording');
+        status.textContent = '🔴 Gravando... aperte ESPAÇO para finalizar e enviar';
+        recordBtn.textContent = '⏹ Parar';
+        recordBtn.classList.add('active');
+
+        // Inicia waveform animada
+        startWaveform(stream);
+
+      } catch (err) {
+        isRecording = false;
+        isStartingRecording = false;
+        status.textContent = '❌ Erro no microfone: ' + err.message;
+      }
+    }
+
+    function stopRecording() {
+      if (!isRecording || !mediaRecorder) return;
+      mediaRecorder.stop();
+      isRecording = false;
+      recordBtn.textContent = '⏺ Gravar';
+      recordBtn.classList.remove('active');
+      overlay.classList.remove('recording');
+    }
+
+    // Desenha ondas sonoras reativas no Canvas
+    function startWaveform(stream) {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const source = audioCtx.createMediaStreamSource(stream);
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 64; 
+        source.connect(analyser);
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function draw() {
+          animationId = requestAnimationFrame(draw);
+          analyser.getByteFrequencyData(dataArray);
+
+          canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+
+          const barWidth = 4;
+          const barGap = 2;
+          const totalBars = Math.floor(canvas.width / (barWidth + barGap));
+
+          for (let i = 0; i < totalBars; i++) {
+            const percent = dataArray[i % bufferLength] / 255;
+            const height = Math.max(3, percent * canvas.height);
+            const x = i * (barWidth + barGap);
+            const y = (canvas.height - height) / 2;
+
+            canvasCtx.fillStyle = `hsla(${230 - i * 3}, 90%, 65%, ${0.35 + percent * 0.65})`;
+            
+            canvasCtx.beginPath();
+            canvasCtx.roundRect(x, y, barWidth, height, 2);
+            canvasCtx.fill();
+          }
+        }
+        draw();
+      } catch (e) {
+        console.error('Visualizer error', e);
+      }
+    }
+
+    function stopWaveform() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
+      if (audioCtx) {
+        audioCtx.close().catch(() => {});
+        audioCtx = null;
+      }
+      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    async function processAudio() {
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      const arrayBuffer = await blob.arrayBuffer();
+      const uint8 = new Uint8Array(arrayBuffer);
+
+      // Atualiza interface para processamento
+      dot.className = 'dot processing';
+      overlay.classList.add('processing');
+      status.textContent = '🔄 Transcrevendo pergunta...';
+      transcriptEl.innerHTML = '<span class="placeholder">Processando áudio...</span>';
+
+      answerEl.className = 'answer loading';
+      answerEl.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+      copyBtn.style.display = 'none';
+
+      fullText = '';
+      currentTranscript = '';
+      currentAnswer = '';
+
+      // Envia os bytes do buffer de áudio para o processo principal
+      ipcRenderer.send('process-audio-stream', {
+        apiKey: config.apiKey,
+        model: config.model,
+        audioBuffer: Array.from(uint8),
+        language: config.language,
+        role: config.role,
+        resume: config.resume,
+        jobDesc: config.jobDesc,
+        history: conversationHistory
+      });
+    }
+
+    // Escuta os pacotes do stream SSE vindo do main process
+    ipcRenderer.on('stream-chunk', (event, data) => {
+      if (data.type === 'chunk') {
+        fullText += data.text;
+
+        const transcriptRegex = /(?:\*\*\[?TRANSCRIPT\]?:?\*\*|\[TRANSCRIPT\]:|\[Transcript\]:|\*\*TRANSCRIPT:\*\*)/i;
+        const answerRegex = /(?:\*\*\[?ANSWER\]?:?\*\*|\[ANSWER\]:|\[Answer\]:|\*\*ANSWER:\*\*)/i;
+
+        const tMatch = fullText.match(transcriptRegex);
+        const aMatch = fullText.match(answerRegex);
+
+        if (tMatch) {
+          const tStart = tMatch.index + tMatch[0].length;
+          if (aMatch) {
+            const aStart = aMatch.index + aMatch[0].length;
+            currentTranscript = fullText.substring(tStart, aMatch.index).trim();
+            currentAnswer = fullText.substring(aStart).trim();
+          } else {
+            currentTranscript = fullText.substring(tStart).trim();
+            currentAnswer = '';
+          }
+        } else if (aMatch) {
+          const aStart = aMatch.index + aMatch[0].length;
+          currentAnswer = fullText.substring(aStart).trim();
+        } else {
+          currentAnswer = fullText.trim();
+        }
+
+        if (currentTranscript) {
+          transcriptEl.innerHTML = `<span class="text">"${currentTranscript}"</span>`;
+        }
+
+        if (currentAnswer) {
+          answerEl.textContent = currentAnswer;
+          answerEl.className = 'answer';
+          copyBtn.style.display = 'inline-flex';
+          status.textContent = '💭 Gerando resposta...';
+        } else {
+          status.textContent = '🔄 Formulando resposta...';
+        }
+
+      } else if (data.type === 'error') {
+        dot.className = 'dot';
+        overlay.className = 'overlay';
+        status.textContent = '❌ Erro de processamento';
+        answerEl.className = 'answer';
+        answerEl.textContent = data.error;
+        copyBtn.style.display = 'none';
+
+      } else if (data.type === 'end') {
+        dot.className = 'dot';
+        overlay.className = 'overlay';
+        status.textContent = '✅ Pronto — aperte ESPAÇO para próxima pergunta';
+
+        if (currentTranscript && currentAnswer) {
+          conversationHistory.push(
+            { role: 'user', content: `Interviewer said: "${currentTranscript}"` },
+            { role: 'assistant', content: currentAnswer }
+          );
+          if (conversationHistory.length > 12) {
+            conversationHistory = conversationHistory.slice(-12);
+          }
+        }
+      }
+    });
+
+    function copyAnswer() {
+      if (!currentAnswer) return;
+      navigator.clipboard.writeText(currentAnswer).then(() => {
+        copyBtn.textContent = '✅ Copiado!';
+        copyBtn.classList.add('active');
+        setTimeout(() => {
+          copyBtn.textContent = '📋 Copiar';
+          copyBtn.classList.remove('active');
+        }, 1800);
+      }).catch(err => {
+        console.error('Erro ao copiar texto: ', err);
+      });
+    }
+  </script>
+</body>
+</html>

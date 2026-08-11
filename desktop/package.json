@@ -1,0 +1,15 @@
+{
+  "name": "talkgenius",
+  "version": "1.0.0",
+  "description": "TalkGenius - AI Interview Assistant",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "package": "electron-packager . TalkGenius --platform=darwin --overwrite --ignore=TalkGenius-darwin-arm64"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-packager": "^17.1.2"
+  }
+}
