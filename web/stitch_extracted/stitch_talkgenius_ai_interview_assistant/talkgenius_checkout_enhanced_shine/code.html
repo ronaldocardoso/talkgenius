@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Checkout | TalkGenius AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Geist', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(18, 18, 18, 0.4);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        .gradient-border-top {
+            position: relative;
+        }
+        .gradient-border-top::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.5), transparent);
+        }
+        .animate-glow-pulse {
+            animation: glowPulse 6s infinite alternate;
+        }
+        @keyframes glowPulse {
+            0% { box-shadow: 0 0 15px rgba(139, 92, 246, 0.05); }
+            100% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.15); }
+        }
+        .bg-glow-spot {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 100%;
+            filter: blur(120px);
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "surface-charcoal": "#121212",
+                    "primary-container": "#a078ff",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-primary": "#6d3bd7",
+                    "primary-fixed": "#e9ddff",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-primary": "#3c0091",
+                    "tertiary-container": "#ca801e",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary-container": "#03b5d3",
+                    "surface-container": "#201f1f",
+                    "surface-tint": "#d0bcff",
+                    "tertiary": "#ffb869",
+                    "background": "#131313",
+                    "primary": "#d0bcff",
+                    "error-container": "#93000a",
+                    "secondary": "#4cd7f6",
+                    "text-high-contrast": "#FFFFFF",
+                    "on-tertiary-container": "#3f2300",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary": "#482900",
+                    "secondary-fixed": "#acedff",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "outline-variant": "#494454",
+                    "outline": "#958ea0",
+                    "inverse-on-surface": "#313030",
+                    "on-primary-container": "#340080",
+                    "on-background": "#e5e2e1",
+                    "text-muted": "#A3A3A3",
+                    "error": "#ffb4ab",
+                    "glow-cyan": "rgba(6, 182, 212, 0.15)",
+                    "surface-variant": "#353534",
+                    "on-surface": "#e5e2e1",
+                    "glow-purple": "rgba(139, 92, 246, 0.15)",
+                    "on-tertiary-fixed": "#2c1700",
+                    "on-secondary-container": "#00424e",
+                    "on-error-container": "#ffdad6",
+                    "surface": "#131313",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed-dim": "#d0bcff",
+                    "on-primary-fixed": "#23005c",
+                    "border-subtle": "#262626",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-secondary-fixed": "#001f26",
+                    "on-secondary": "#003640",
+                    "surface-dim": "#131313",
+                    "secondary-fixed-dim": "#4cd7f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "display-lg-mobile": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "body-md": ["Geist"],
+                    "headline-md": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="overflow-x-hidden min-h-screen flex flex-col relative">
+<!-- Background Glows -->
+<div class="bg-glow-spot bg-primary -top-48 -left-48"></div>
+<div class="bg-glow-spot bg-secondary -bottom-48 -right-48"></div>
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-xl border-b border-white/10 h-20 px-margin-desktop flex justify-between items-center max-w-container-max mx-auto left-0 right-0">
+<div class="font-headline-md text-headline-md font-bold text-text-high-contrast tracking-tighter">TalkGenius</div>
+<div class="hidden md:flex gap-8 items-center">
+<span class="font-label-sm text-label-sm text-text-muted flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+                Secure Checkout
+            </span>
+</div>
+</nav>
+<main class="flex-grow pt-32 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+<!-- Left Side: Order Summary -->
+<div class="lg:col-span-5 space-y-8">
+<div>
+<h1 class="font-headline-md text-headline-md text-text-high-contrast mb-4">Finalize your plan</h1>
+<p class="font-body-md text-body-md text-text-muted">Unlock the full power of AI-driven interview intelligence today.</p>
+</div>
+<!-- Plan Card with enhanced Glassmorphism -->
+<div class="glass-panel rounded-xl p-8 space-y-6 gradient-border-top animate-glow-pulse">
+<div class="flex justify-between items-start">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary mb-2 block">Premium Tier</span>
+<h2 class="font-headline-md text-headline-md text-text-high-contrast">Monthly Plan</h2>
+</div>
+<div class="text-right">
+<span class="font-headline-md text-headline-md text-secondary">R$ 99,00</span>
+<span class="block font-label-sm text-label-sm text-text-muted">per month</span>
+</div>
+</div>
+<div class="space-y-4 border-t border-white/10 pt-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Real-time Interview Assistance</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Unlimited AI Transcriptions</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Sentiment &amp; Skill Analysis</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-body-md text-body-md">Advanced Searchable History</span>
+</div>
+</div>
+<div class="bg-primary/10 rounded-lg p-4 border border-primary/30 flex items-start gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<p class="font-label-sm text-label-sm text-on-background/80 leading-relaxed">
+                            Limited to 1 computer per user. Sessions are linked to your unique hardware ID for security.
+                        </p>
+</div>
+</div>
+<div class="flex items-center gap-6 pt-4">
+<div class="flex items-center gap-2 text-text-muted opacity-70">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+<span class="font-label-sm text-label-sm">Secure SSL Encryption</span>
+</div>
+<div class="flex items-center gap-2 text-text-muted opacity-70">
+<span class="material-symbols-outlined text-[20px]">compare</span>
+<span class="font-label-sm text-label-sm">PCI Compliant</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Payment Form -->
+<div class="lg:col-span-7">
+<div class="glass-panel rounded-xl p-8 md:p-12">
+<div class="mb-10">
+<div class="flex gap-4 mb-8">
+<button class="flex-1 py-3 px-4 rounded-lg bg-white/5 border border-primary text-primary flex items-center justify-center gap-2 transition-all shadow-[0_0_15px_rgba(208,188,255,0.1)]" id="card-tab" onclick="togglePayment('card')">
+<span class="material-symbols-outlined">credit_card</span>
+<span class="font-label-sm text-label-sm">Credit Card</span>
+</button>
+<button class="flex-1 py-3 px-4 rounded-lg bg-transparent border border-border-subtle text-text-muted flex items-center justify-center gap-2 hover:bg-white/5 transition-all" id="pix-tab" onclick="togglePayment('pix')">
+<span class="material-symbols-outlined">qr_code</span>
+<span class="font-label-sm text-label-sm">Pix</span>
+</button>
+</div>
+<!-- Credit Card Form -->
+<form class="space-y-6" id="card-form">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted px-1">Cardholder Name</label>
+<input class="w-full bg-[#0A0A0A]/50 border-border-subtle rounded-lg py-4 px-4 text-on-background focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-[0_0_15px_rgba(76,215,246,0.2)] transition-all outline-none" placeholder="Johnathan Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted px-1">Card Number</label>
+<div class="relative">
+<input class="w-full bg-[#0A0A0A]/50 border-border-subtle rounded-lg py-4 px-4 text-on-background focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-[0_0_15px_rgba(76,215,246,0.2)] transition-all outline-none" placeholder="0000 0000 0000 0000" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-1">
+<div class="w-8 h-5 bg-white/10 rounded"></div>
+<div class="w-8 h-5 bg-white/10 rounded"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted px-1">Expiry Date</label>
+<input class="w-full bg-[#0A0A0A]/50 border-border-subtle rounded-lg py-4 px-4 text-on-background focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-[0_0_15px_rgba(76,215,246,0.2)] transition-all outline-none" placeholder="MM / YY" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted px-1">CVV</label>
+<input class="w-full bg-[#0A0A0A]/50 border-border-subtle rounded-lg py-4 px-4 text-on-background focus:ring-2 focus:ring-secondary/50 focus:border-secondary focus:shadow-[0_0_15px_rgba(76,215,246,0.2)] transition-all outline-none" placeholder="***" type="text"/>
+</div>
+</div>
+<div class="pt-4">
+<button class="w-full bg-gradient-to-r from-primary to-secondary py-5 rounded-full font-label-sm text-label-sm text-on-primary-container font-bold hover:brightness-110 active:scale-[0.98] transition-all shadow-[0_0_30px_rgba(208,188,255,0.3)] hover:shadow-[0_0_40px_rgba(208,188,255,0.4)]" type="submit">
+                                    Complete Purchase • R$ 99,00
+                                </button>
+<p class="text-center font-label-sm text-label-sm text-text-muted mt-4">
+                                    By clicking above, you agree to our <a class="underline hover:text-primary transition-colors" href="#">Terms of Service</a>.
+                                </p>
+</div>
+</form>
+<!-- Pix Interface -->
+<div class="hidden space-y-8 text-center" id="pix-form">
+<div class="mx-auto w-48 h-48 bg-white rounded-xl p-3 flex items-center justify-center shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+<img alt="Payment QR Code" class="w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsCsXAwU9zEblZ1V5-sM4N3wL5TeZuP1SCnymamma8moneW1nLal_Z-r6ya7XSoDfz1k3DHSzLV38yxZmBk5xZkqU09j2JDZlhCessIS0BOMvvxsXqkTho4Yjyu9K_78pgSiMZlX-peK12L0I5fcYNADRArPMNc5BT4DWMKFW9fIGyKKgYihbEcLsiWWZcZoyxnVTPde9LmvzgYlBi1crlPBLWqxotqj5XrjMVki8GTdjtMUCAvtnHLCT45IB39mFUBurcQkaVA9w"/>
+</div>
+<div class="space-y-2">
+<p class="font-body-md text-body-md text-text-high-contrast">Scan the QR Code to pay</p>
+<p class="font-label-sm text-label-sm text-text-muted">Total to pay: R$ 99,00</p>
+</div>
+<div class="bg-[#0A0A0A]/50 border border-border-subtle rounded-lg p-4 flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-text-muted truncate mr-4">00020101021226850014br.gov.bcb.pix...</span>
+<button class="text-secondary font-label-sm text-label-sm whitespace-nowrap hover:underline">Copy Code</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-white/5 bg-surface-dim/80 backdrop-blur-sm">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md font-bold text-text-high-contrast">TalkGenius</div>
+<p class="font-label-sm text-label-sm text-text-muted">© 2024 TalkGenius AI. Limited to 1 computer per user.</p>
+</div>
+<div class="flex flex-col gap-3">
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Contact Support</a>
+</div>
+<div class="flex items-center md:justify-end gap-4 opacity-50">
+<img alt="Visa" class="h-6 filter grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr5NAhShRepJN0bSbA9kSpzb_Lw8t5PuhZ-sddc3Gz2WXbo10sRbnGANu1Xx03wQuiNSAupmNF3-GaUFWEnhIh3AUzEqrpTcN7Bx9mHPHjqdlGIuGRcQ-4HYsxJ2gR02vvVLtRbaDONhp6mhY6MAnULdQaBmUuFpndGv0wlleAKZueWKIG9eOQEG8EdJQMq_ToGpnG4jucK3m4Qbtc0p1Hy1VME3Wbbxa2tFssoV12SywHk4PCbk05do1DFYkSYaZoeHtZttnq20g"/>
+<img alt="Mastercard" class="h-6 filter grayscale brightness-200" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnq1JKZDD_xTbKYF8X2XVzelgTD9v5mGzOprUeqOxCsqXuD7zA82FgK1tH8nRnQC8PDRJfh1uE1AVA9BSrSUNdNUKUjeJrBMnp55A-nBMMugOfAiUDmjcpXc98qxhh03Mz-X3i_4UFnjxtelvkJohfna_1o9NJA0HQuJC16RaeC1ojO7herMJVYrdwZ24duGXwEe_WXJk1-stLU7kagD48R-VIitf-HEfs_mPKV0Doc-is9kFxyWJ3uZJdgeMLku0fhP06ebditqY"/>
+<img alt="Pix" class="h-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBuS91kwqFcytrjwalmD7zvlMA9QhWNQlAr59qDukbpeQf1amRiw78PVI03zqjB32t-S-ANDpwUK2aRaaTVhtP7H8UH0G9CKp_8BxpfMV5WXJIKT0LAA2HuAmzFIrydHVy-41b7UYqSaCasuRHnTSKsGtqNs80_hrQ96yhYj5-W1__E4cjNzwVjZgzxkwq3ozhpKgjvwDu895233NLd_BH4jmDb8Km91yEhG4aCfkqaOvipTGq9WC6NkHs85YzpdCmxN6PSYzlXj-w"/>
+</div>
+</div>
+</footer>
+<script>
+        function togglePayment(type) {
+            const cardTab = document.getElementById('card-tab');
+            const pixTab = document.getElementById('pix-tab');
+            const cardForm = document.getElementById('card-form');
+            const pixForm = document.getElementById('pix-form');
+
+            if (type === 'card') {
+                cardTab.classList.add('bg-white/5', 'border-primary', 'text-primary');
+                cardTab.classList.remove('bg-transparent', 'border-border-subtle', 'text-text-muted');
+                cardTab.style.boxShadow = '0 0 15px rgba(208,188,255,0.1)';
+                pixTab.classList.remove('bg-white/5', 'border-primary', 'text-primary');
+                pixTab.classList.add('bg-transparent', 'border-border-subtle', 'text-text-muted');
+                pixTab.style.boxShadow = 'none';
+                cardForm.classList.remove('hidden');
+                pixForm.classList.add('hidden');
+            } else {
+                pixTab.classList.add('bg-white/5', 'border-primary', 'text-primary');
+                pixTab.classList.remove('bg-transparent', 'border-border-subtle', 'text-text-muted');
+                pixTab.style.boxShadow = '0 0 15px rgba(208,188,255,0.1)';
+                cardTab.classList.remove('bg-white/5', 'border-primary', 'text-primary');
+                cardTab.classList.add('bg-transparent', 'border-border-subtle', 'text-text-muted');
+                cardTab.style.boxShadow = 'none';
+                pixForm.classList.remove('hidden');
+                cardForm.classList.add('hidden');
+            }
+        }
+    </script>
+</body></html>

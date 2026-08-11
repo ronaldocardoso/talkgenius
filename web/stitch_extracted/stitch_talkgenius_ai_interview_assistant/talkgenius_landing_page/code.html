@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TalkGenius - Inteligência Artificial para Entrevistas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#690005",
+                    "text-high-contrast": "#FFFFFF",
+                    "primary-fixed-dim": "#d0bcff",
+                    "on-background": "#e5e2e1",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "on-secondary-fixed": "#001f26",
+                    "tertiary-container": "#ca801e",
+                    "glow-purple": "rgba(139, 92, 246, 0.15)",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-variant": "#353534",
+                    "on-tertiary-container": "#3f2300",
+                    "surface-container": "#201f1f",
+                    "secondary-container": "#03b5d3",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-high": "#2a2a2a",
+                    "on-primary-fixed-variant": "#5516be",
+                    "error-container": "#93000a",
+                    "on-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "secondary-fixed": "#acedff",
+                    "tertiary-fixed": "#ffdcbb",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "on-tertiary-fixed": "#2c1700",
+                    "secondary": "#4cd7f6",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "surface-dim": "#131313",
+                    "on-primary-container": "#340080",
+                    "on-secondary-container": "#00424e",
+                    "inverse-primary": "#6d3bd7",
+                    "surface": "#131313",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "text-muted": "#A3A3A3",
+                    "outline-variant": "#494454",
+                    "outline": "#958ea0",
+                    "on-secondary": "#003640",
+                    "primary": "#d0bcff",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary": "#482900",
+                    "background": "#131313",
+                    "tertiary": "#ffb869",
+                    "border-subtle": "#262626",
+                    "glow-cyan": "rgba(6, 182, 212, 0.15)",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#d0bcff",
+                    "primary-container": "#a078ff",
+                    "on-primary": "#3c0091",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#e9ddff",
+                    "surface-bright": "#3a3939",
+                    "on-primary-fixed": "#23005c",
+                    "surface-charcoal": "#121212"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "label-sm": ["Geist"],
+                    "body-md": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "display-lg-mobile": ["Geist"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .glass-card {
+        background: rgba(18, 18, 18, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      }
+      .glass-card:hover {
+        border-color: rgba(208, 188, 255, 0.3);
+        box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+      }
+      .text-gradient {
+        background: linear-gradient(90deg, #d0bcff 0%, #4cd7f6 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .btn-gradient {
+        background: linear-gradient(135deg, #a078ff 0%, #03b5d3 100%);
+        transition: all 0.3s ease;
+      }
+      .btn-gradient:hover {
+        filter: brightness(1.1);
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        transform: translateY(-1px);
+      }
+      .pulse-ai {
+        animation: pulse 2s infinite ease-in-out;
+      }
+      @keyframes pulse {
+        0%, 100% { opacity: 0.5; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.1); }
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+        gap: 24px;
+      }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-glow-purple">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-text-high-contrast tracking-tighter">
+          TalkGenius
+        </div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-text-muted hover:text-text-high-contrast transition-colors font-body-md text-body-md" href="#features">Features</a>
+<a class="text-text-muted hover:text-text-high-contrast transition-colors font-body-md text-body-md" href="#pricing">Pricing</a>
+<a class="px-6 py-2.5 btn-gradient rounded-full text-white font-bold text-body-md active:scale-95 transition-transform" href="#">Download for Desktop</a>
+</div>
+<button class="md:hidden text-text-high-contrast">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</nav>
+<main class="relative">
+<!-- Hero Section -->
+<section class="relative pt-40 pb-20 px-margin-mobile md:px-margin-desktop overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full -z-10 opacity-30">
+
+</div>
+<div class="max-w-container-max mx-auto text-center">
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border-primary/20 mb-8 animate-fade-in">
+<span class="w-2 h-2 rounded-full bg-secondary pulse-ai"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest text-primary">Agora com suporte a 40+ línguas</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-text-high-contrast mb-6 max-w-4xl mx-auto leading-tight">
+            Domine suas entrevistas em <span class="text-gradient">qualquer língua</span> com IA
+          </h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto mb-12">
+            O assistente de IA que roda direto no seu Mac ou Windows para te apoiar em tempo real, sugerindo respostas e traduzindo conceitos complexos.
+          </p>
+<div class="flex flex-col md:flex-row items-center justify-center gap-4">
+<button class="w-full md:w-auto px-8 py-4 btn-gradient rounded-full text-white font-bold text-body-lg active:scale-95 transition-all">
+              Baixar para Desktop
+            </button>
+<button class="w-full md:w-auto px-8 py-4 glass-card rounded-full text-text-high-contrast font-bold text-body-lg hover:bg-white/10 active:scale-95 transition-all">
+              Ver Planos
+            </button>
+</div>
+</div>
+<!-- Hero Mockup -->
+<div class="mt-20 max-w-5xl mx-auto relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
+<div class="relative glass-card rounded-2xl overflow-hidden aspect-video">
+<img class="w-full h-full object-cover" data-alt="A futuristic software interface mockup showing a transparent glass window floating over a dark desktop environment. The UI features real-time audio waveforms in vibrant purple and cyan colors, with AI-generated text suggestions appearing in a clean, minimalist layout. The background is a sleek, professional office space softly blurred to emphasize the technological software in the foreground." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTJTtQy39oqp82Y3AdUlwFMN7gQVyRT6cDhwoJ8XbhzZeyvcgIjB5t0JAlaAU0b3fMa2JM2w3w-KnhLbGekalcWLQMH2opCYe0Wm4ZUJKwsNzlXDH6K26f-jt46KY-UXuhuKJ-c4VyyUg5C3-GAcQ-CQTlnNgGWNIfxkVTe8m-Z9i8_KgiMZQ-hm8iX1awzDDdixx9YmIUq9SPxl5c6Zb2Jxv4Tg0pUnrIfEaqr03vxU_BcOWkb1Os8QnGfGQp4_zzSM8qQ9GsRjE"/>
+<!-- Floating UI Element -->
+<div class="absolute bottom-8 right-8 w-64 glass-card p-4 rounded-xl border-white/20 animate-bounce-slow">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-bold text-label-sm">Sugestão TalkGenius</span>
+</div>
+<p class="text-xs text-text-muted leading-relaxed">"Based on your background in Cloud Architecture, you should highlight..."</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Bento Grid -->
+<section class="py-20 px-margin-mobile md:px-margin-desktop bg-surface-container-lowest" id="features">
+<div class="max-w-container-max mx-auto">
+<div class="mb-16">
+<h2 class="font-headline-md text-headline-md text-text-high-contrast mb-4">Inteligência que entende o contexto</h2>
+<p class="text-text-muted font-body-md">Recursos desenhados para que você se sinta confiante, não importa o desafio.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Feature 1 -->
+<div class="md:col-span-8 glass-card p-8 rounded-3xl relative overflow-hidden group">
+<div class="relative z-10 flex flex-col justify-end h-full min-h-[300px]">
+<span class="material-symbols-outlined text-4xl text-primary mb-4">translate</span>
+<h3 class="text-2xl font-bold text-text-high-contrast mb-2">Tradução em tempo real</h3>
+<p class="text-text-muted max-w-md">Ouça a pergunta em qualquer língua e veja a tradução instantânea na sua tela. Nunca mais perca o fio da meada.</p>
+</div>
+<div class="absolute top-0 right-0 w-1/2 h-full opacity-20 pointer-events-none group-hover:opacity-40 transition-opacity">
+
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="md:col-span-4 glass-card p-8 rounded-3xl group">
+<span class="material-symbols-outlined text-4xl text-secondary mb-4">psychology</span>
+<h3 class="text-xl font-bold text-text-high-contrast mb-2">Sugestões de Resposta</h3>
+<p class="text-text-muted">A IA analisa a pergunta do recrutador e sugere tópicos chave baseados no seu currículo e experiência.</p>
+</div>
+<!-- Feature 3 -->
+<div class="md:col-span-4 glass-card p-8 rounded-3xl group">
+<span class="material-symbols-outlined text-4xl text-tertiary mb-4">verified_user</span>
+<h3 class="text-xl font-bold text-text-high-contrast mb-2">Privacidade Total</h3>
+<p class="text-text-muted">O processamento é local. Suas reuniões e dados pessoais nunca saem do seu computador.</p>
+</div>
+<!-- Feature 4 -->
+<div class="md:col-span-8 glass-card p-8 rounded-3xl relative overflow-hidden group">
+<div class="flex flex-col md:flex-row gap-8 items-center h-full">
+<div class="flex-1">
+<h3 class="text-2xl font-bold text-text-high-contrast mb-2">Suporte Multilíngue</h3>
+<p class="text-text-muted">Inglês, Português, Espanhol, Francês, Alemão e mais de 35 outros idiomas suportados nativamente.</p>
+</div>
+<div class="flex-1 flex flex-wrap gap-2 justify-center">
+<span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold border border-primary/20">PT-BR</span>
+<span class="px-3 py-1 rounded-full bg-secondary/10 text-secondary text-xs font-bold border border-secondary/20">EN-US</span>
+<span class="px-3 py-1 rounded-full bg-tertiary/10 text-tertiary text-xs font-bold border border-tertiary/20">ES-ES</span>
+<span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold border border-white/20">FR-FR</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-32 px-margin-mobile md:px-margin-desktop" id="pricing">
+<div class="max-w-container-max mx-auto">
+<div class="text-center mb-16">
+<h2 class="font-headline-md text-headline-md text-text-high-contrast mb-4">Planos que cabem no seu sucesso</h2>
+<p class="text-text-muted max-w-xl mx-auto">Escolha o investimento certo para a sua próxima grande conquista profissional.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+<!-- Weekly Plan -->
+<div class="glass-card p-10 rounded-3xl border-white/10 flex flex-col hover:scale-[1.02] transition-transform duration-500">
+<div class="mb-8">
+<h3 class="text-xl font-bold text-text-high-contrast mb-2">Plano Semanal</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold text-text-high-contrast">R$ 59,90</span>
+<span class="text-text-muted">/semana</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-center gap-3 text-text-muted">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                  Até 2 entrevistas por semana
+                </li>
+<li class="flex items-center gap-3 text-text-muted">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                  Suporte em Tempo Real
+                </li>
+<li class="flex items-center gap-3 text-text-muted">
+<span class="material-symbols-outlined text-secondary text-sm">check_circle</span>
+                  Todos os Idiomas
+                </li>
+</ul>
+<button class="w-full py-4 rounded-xl border border-white/10 font-bold hover:bg-white/5 transition-colors">Assinar Semanal</button>
+</div>
+<!-- Monthly Plan (Featured) -->
+<div class="glass-card p-10 rounded-3xl border-primary/50 relative overflow-hidden flex flex-col scale-105 shadow-glow-purple z-10">
+<div class="absolute top-0 right-0 px-6 py-2 bg-primary text-on-primary font-bold text-xs uppercase tracking-tighter rounded-bl-2xl">
+                Mais Popular
+              </div>
+<div class="mb-8">
+<h3 class="text-xl font-bold text-text-high-contrast mb-2">Plano Mensal</h3>
+<div class="flex items-baseline gap-1">
+<span class="text-3xl font-bold text-text-high-contrast">R$ 99,00</span>
+<span class="text-text-muted">/mês</span>
+</div>
+</div>
+<ul class="space-y-4 mb-10 flex-1">
+<li class="flex items-center gap-3 text-text-high-contrast">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Até 6 entrevistas por mês
+                </li>
+<li class="flex items-center gap-3 text-text-high-contrast">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Prioridade no Processamento IA
+                </li>
+<li class="flex items-center gap-3 text-text-high-contrast">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                  Suporte VIP 24/7
+                </li>
+</ul>
+<button class="w-full py-4 rounded-xl btn-gradient font-bold text-white shadow-xl">Assinar Mensal</button>
+</div>
+</div>
+<p class="text-center mt-12 text-label-sm text-text-muted uppercase tracking-widest font-bold">
+            Limitado a 1 computador por usuário
+          </p>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 bg-surface-dim">
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="glass-card p-8 rounded-2xl italic text-text-muted relative">
+              "Consegui minha vaga na Google de Berlim usando o TalkGenius. O delay é quase imperceptível e as sugestões de termos técnicos me salvaram."
+              <div class="mt-6 flex items-center gap-4 non-italic">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary"></div>
+<div>
+<div class="font-bold text-text-high-contrast text-sm">Lucas Silva</div>
+<div class="text-xs">Senior Dev @ Google</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-2xl italic text-text-muted relative">
+              "A melhor ferramenta de produtividade para quem está aplicando para vagas remotas no exterior. Transmite muita segurança durante a call."
+              <div class="mt-6 flex items-center gap-4 non-italic">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-secondary to-tertiary"></div>
+<div>
+<div class="font-bold text-text-high-contrast text-sm">Marina Rocha</div>
+<div class="text-xs">Product Designer @ Revolut</div>
+</div>
+</div>
+</div>
+<div class="glass-card p-8 rounded-2xl italic text-text-muted relative">
+              "Fiquei surpreso com o quanto a IA entende o contexto de perguntas comportamentais. Me ajudou a estruturar minhas respostas no método STAR."
+              <div class="mt-6 flex items-center gap-4 non-italic">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-tertiary to-primary"></div>
+<div>
+<div class="font-bold text-text-high-contrast text-sm">Felipe Neves</div>
+<div class="text-xs">Cloud Specialist @ AWS</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA -->
+<section class="py-32 px-margin-mobile relative overflow-hidden">
+<div class="absolute inset-0 -z-10 opacity-20">
+
+</div>
+<div class="max-w-4xl mx-auto text-center glass-card p-16 rounded-[3rem] border-primary/30 relative">
+<h2 class="text-4xl md:text-5xl font-bold text-text-high-contrast mb-8 leading-tight">
+            Comece sua jornada para o emprego dos sonhos hoje
+          </h2>
+<p class="text-xl text-text-muted mb-12">
+            Junte-se a milhares de profissionais que já estão conquistando o mercado global com o TalkGenius.
+          </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<button class="w-full sm:w-auto px-12 py-5 btn-gradient rounded-full text-white font-bold text-lg active:scale-95 transition-all">
+              Criar minha conta agora
+            </button>
+<button class="w-full sm:w-auto px-12 py-5 glass-card rounded-full text-text-high-contrast font-bold text-lg hover:bg-white/10 active:scale-95 transition-all">
+              Falar com suporte
+            </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-surface-dim border-t border-border-subtle">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<div class="flex flex-col gap-4">
+<div class="font-headline-md text-headline-md font-bold text-text-high-contrast">TalkGenius</div>
+<p class="text-text-muted font-label-sm text-label-sm max-w-xs">
+            A ferramenta definitiva para profissionais globais que buscam excelência em suas comunicações.
+          </p>
+<div class="flex gap-4 mt-2">
+<span class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors">brand_awareness</span>
+<span class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors">public</span>
+<span class="material-symbols-outlined text-text-muted hover:text-primary cursor-pointer transition-colors">shield</span>
+</div>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-text-high-contrast font-bold">Links Úteis</h4>
+<ul class="flex flex-col gap-3">
+<li><a class="text-text-muted hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Privacy Policy</a></li>
+<li><a class="text-text-muted hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Terms of Service</a></li>
+<li><a class="text-text-muted hover:text-secondary transition-colors font-label-sm text-label-sm" href="#">Contact Support</a></li>
+</ul>
+</div>
+<div class="flex flex-col gap-6">
+<h4 class="text-text-high-contrast font-bold">Newsletter</h4>
+<p class="text-text-muted font-label-sm text-label-sm">Receba dicas de carreira e novidades sobre IA direto no seu e-mail.</p>
+<div class="flex gap-2">
+<input class="flex-1 bg-background border border-border-subtle rounded-lg px-4 py-2 text-sm focus:border-primary outline-none transition-all" placeholder="Seu melhor e-mail" type="email"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-sm hover:opacity-90 transition-opacity">OK</button>
+</div>
+</div>
+</div>
+<div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop mt-12 pt-8 border-t border-border-subtle/50 text-center">
+<p class="text-text-muted font-label-sm text-label-sm opacity-80">
+          © 2024 TalkGenius AI. Limited to 1 computer per user.
+        </p>
+</div>
+</footer>
+<script>
+      // Subtle scroll effect for the navbar
+      window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 20) {
+          nav.classList.add('bg-background/90');
+          nav.classList.remove('bg-background/60');
+        } else {
+          nav.classList.add('bg-background/60');
+          nav.classList.remove('bg-background/90');
+        }
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+          });
+        });
+      });
+    </script>
+</body></html>

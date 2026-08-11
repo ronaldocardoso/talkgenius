@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suporte TalkGenius | Inteligência em Movimento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#23005c",
+                    "surface-charcoal": "#121212",
+                    "error": "#ffb4ab",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed": "#e9ddff",
+                    "on-error-container": "#ffdad6",
+                    "surface-tint": "#d0bcff",
+                    "primary-container": "#a078ff",
+                    "on-primary": "#3c0091",
+                    "border-subtle": "#262626",
+                    "glow-cyan": "rgba(6, 182, 212, 0.15)",
+                    "tertiary": "#ffb869",
+                    "on-secondary": "#003640",
+                    "outline": "#958ea0",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary": "#482900",
+                    "primary": "#d0bcff",
+                    "background": "#131313",
+                    "outline-variant": "#494454",
+                    "surface-container-lowest": "#0e0e0e",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "text-muted": "#A3A3A3",
+                    "surface-dim": "#131313",
+                    "on-primary-container": "#340080",
+                    "on-secondary-container": "#00424e",
+                    "surface": "#131313",
+                    "inverse-primary": "#6d3bd7",
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "on-surface-variant": "#cbc3d7",
+                    "secondary": "#4cd7f6",
+                    "on-tertiary-fixed": "#2c1700",
+                    "secondary-fixed": "#acedff",
+                    "tertiary-fixed": "#ffdcbb",
+                    "secondary-fixed-dim": "#4cd7f6",
+                    "inverse-surface": "#e5e2e1",
+                    "on-surface": "#e5e2e1",
+                    "on-primary-fixed-variant": "#5516be",
+                    "error-container": "#93000a",
+                    "surface-container-high": "#2a2a2a",
+                    "inverse-on-surface": "#313030",
+                    "on-tertiary-container": "#3f2300",
+                    "surface-container": "#201f1f",
+                    "secondary-container": "#03b5d3",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "on-secondary-fixed": "#001f26",
+                    "on-background": "#e5e2e1",
+                    "glow-purple": "rgba(139, 92, 246, 0.15)",
+                    "tertiary-container": "#ca801e",
+                    "surface-variant": "#353534",
+                    "surface-container-low": "#1c1b1b",
+                    "on-error": "#690005",
+                    "text-high-contrast": "#FFFFFF",
+                    "primary-fixed-dim": "#d0bcff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "64px",
+                    "margin-mobile": "20px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "body-md": ["Geist"],
+                    "headline-md": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "display-lg-mobile": ["Geist"],
+                    "body-lg": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .lumina-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                #0A0A0A;
+        }
+
+        .glass-card {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .neon-glow {
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5), 0 0 30px rgba(6, 182, 212, 0.3);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            box-shadow: 0 0 10px rgba(6, 182, 212, 0.3);
+            border-color: #4cd7f6 !important;
+            outline: none;
+        }
+    </style>
+</head>
+<body class="bg-background">
+<div class="lumina-bg"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-glow-purple">
+<div class="font-headline-md text-headline-md font-bold text-text-high-contrast tracking-tighter">TalkGenius</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Platform</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Solutions</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Resources</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-body-md text-body-md" href="#">Pricing</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:block text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm px-4 py-2 opacity-80 hover:opacity-100 scale-95 active:scale-90 transition-transform">Log In</button>
+<button class="bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed font-label-sm text-label-sm px-6 py-2.5 rounded-full font-bold neon-glow scale-95 active:scale-90 transition-transform">Get Started</button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop container mx-auto">
+<!-- Hero Section -->
+<section class="max-w-4xl mx-auto text-center mb-24 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">Suporte Inteligente</span>
+</div>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg mb-6 bg-gradient-to-b from-text-high-contrast to-text-muted bg-clip-text text-transparent">
+                Suporte TalkGenius
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+                Estamos aqui para garantir que sua jornada rumo à próxima conquista seja impecável. Encontre soluções rápidas ou entre em contato com nossos especialistas.
+            </p>
+</section>
+<!-- Support Categories Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-32">
+<!-- Card 1 -->
+<div class="glass-card rounded-xl p-8 flex flex-col group">
+<div class="w-12 h-12 rounded-lg bg-primary/20 flex items-center justify-center mb-6 border border-primary/30 group-hover:bg-primary/40 transition-colors">
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-text-high-contrast">Conta e Acesso</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
+                    Gerencie sua assinatura, recupere senhas e configure seu hardware ID para acesso multiplataforma.
+                </p>
+<a class="font-label-sm text-label-sm text-primary flex items-center gap-2 group/link" href="#">
+                    Explorar Base de Conhecimento 
+                    <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2 -->
+<div class="glass-card rounded-xl p-8 flex flex-col group">
+<div class="w-12 h-12 rounded-lg bg-secondary/20 flex items-center justify-center mb-6 border border-secondary/30 group-hover:bg-secondary/40 transition-colors">
+<span class="material-symbols-outlined text-secondary" data-icon="terminal">terminal</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-text-high-contrast">Suporte Técnico</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
+                    Resolução de problemas, guias de instalação para Windows/Mac e otimização de latência de IA.
+                </p>
+<a class="font-label-sm text-label-sm text-secondary flex items-center gap-2 group/link" href="#">
+                    Verificar Status do Sistema
+                    <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3 -->
+<div class="glass-card rounded-xl p-8 flex flex-col group">
+<div class="w-12 h-12 rounded-lg bg-tertiary/20 flex items-center justify-center mb-6 border border-tertiary/30 group-hover:bg-tertiary/40 transition-colors">
+<span class="material-symbols-outlined text-tertiary" data-icon="payments">payments</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-3 text-text-high-contrast">Faturamento</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 flex-grow">
+                    Acesse faturas, altere métodos de pagamento ou faça o upgrade do seu plano para o nível Enterprise.
+                </p>
+<a class="font-label-sm text-label-sm text-tertiary flex items-center gap-2 group/link" href="#">
+                    Gerenciar Pagamentos
+                    <span class="material-symbols-outlined text-[16px] group-hover/link:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Contact Form Section -->
+<section class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-32">
+<div>
+<h2 class="font-headline-md text-headline-md text-text-high-contrast mb-6">Envie uma mensagem</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-8">
+                    Não encontrou o que procurava? Nossa equipe de elite responderá em até 24 horas úteis.
+                </p>
+<div class="space-y-6">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-high-contrast">Email Direto</p>
+<p class="font-body-md text-body-md text-on-surface-variant">support@talkgenius.ai</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="schedule">schedule</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-text-high-contrast">Horário de Atendimento</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Segunda a Sexta, 09:00 - 18:00 BRT</p>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-8 border border-white/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[60px] -mr-16 -mt-16"></div>
+<form class="space-y-6 relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted">Nome</label>
+<input class="w-full bg-background border border-border-subtle rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-0 transition-all" placeholder="Seu nome completo" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted">Email Profissional</label>
+<input class="w-full bg-background border border-border-subtle rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-0 transition-all" placeholder="nome@empresa.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted">Assunto</label>
+<select class="w-full bg-background border border-border-subtle rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-0 transition-all appearance-none">
+<option>Selecione uma categoria</option>
+<option>Suporte Técnico</option>
+<option>Vendas e Planos</option>
+<option>Feedback e Sugestões</option>
+<option>Outros</option>
+</select>
+</div>
+<div class="space-y-2">
+<label class="font-label-sm text-label-sm text-text-muted">Mensagem</label>
+<textarea class="w-full bg-background border border-border-subtle rounded-lg px-4 py-3 font-body-md text-body-md text-on-surface focus:ring-0 transition-all resize-none" placeholder="Como podemos ajudar?" rows="4"></textarea>
+</div>
+<button class="w-full bg-gradient-to-r from-primary-container to-secondary-container text-on-primary-fixed font-headline-md text-label-sm py-4 rounded-xl font-bold neon-glow hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-3" type="submit">
+                        Enviar Mensagem
+                        <span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</form>
+</div>
+</section>
+<!-- Direct Help / Documentation CTA -->
+<section class="glass-card rounded-3xl p-1 md:p-px bg-gradient-to-r from-primary/30 via-secondary/30 to-primary/30">
+<div class="bg-surface-container-lowest rounded-[23px] px-8 py-12 md:py-16 text-center">
+<h2 class="font-headline-md text-headline-md text-text-high-contrast mb-4">Precisa de ajuda imediata?</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-xl mx-auto">
+                    Nossa documentação completa e fórum da comunidade estão disponíveis 24/7 para que você nunca perca o ritmo.
+                </p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<a class="px-8 py-4 rounded-full border border-primary/40 text-primary font-label-sm text-label-sm hover:bg-primary/10 transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="description">description</span>
+                        Ver Documentação
+                    </a>
+<a class="px-8 py-4 rounded-full border border-secondary/40 text-secondary font-label-sm text-label-sm hover:bg-secondary/10 transition-colors flex items-center justify-center gap-2" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="groups">groups</span>
+                        Comunidade TalkGenius
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-border-subtle bg-surface-container-lowest">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="font-headline-md text-headline-md text-primary font-bold tracking-tighter">TalkGenius</div>
+<p class="font-label-sm text-label-sm text-text-muted">© 2024 TalkGenius AI. Intelligence in Motion.</p>
+</div>
+<div class="flex gap-8">
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Security</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors opacity-80 hover:opacity-100" href="#">Status</a>
+</div>
+</footer>
+<script>
+        // Micro-interactions for form inputs
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.replace('text-text-muted', 'text-secondary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.replace('text-secondary', 'text-text-muted');
+            });
+        });
+
+        // Simple paralax for the glow background
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            const bg = document.querySelector('.lumina-bg');
+            bg.style.background = `
+                radial-gradient(circle at ${20 + (x * 10)}% ${30 + (y * 10)}%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at ${80 - (x * 10)}% ${70 - (y * 10)}%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                #0A0A0A
+            `;
+        });
+    </script>
+</body></html>

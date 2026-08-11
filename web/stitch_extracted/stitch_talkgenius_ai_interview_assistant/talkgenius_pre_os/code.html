@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TalkGenius - Pricing</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#004e5c",
+                    "surface-charcoal": "#121212",
+                    "primary-container": "#a078ff",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-primary": "#6d3bd7",
+                    "primary-fixed": "#e9ddff",
+                    "on-surface-variant": "#cbc3d7",
+                    "on-primary": "#3c0091",
+                    "tertiary-container": "#ca801e",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary-container": "#03b5d3",
+                    "surface-container": "#201f1f",
+                    "surface-tint": "#d0bcff",
+                    "tertiary": "#ffb869",
+                    "background": "#131313",
+                    "primary": "#d0bcff",
+                    "error-container": "#93000a",
+                    "secondary": "#4cd7f6",
+                    "text-high-contrast": "#FFFFFF",
+                    "on-tertiary-container": "#3f2300",
+                    "surface-container-high": "#2a2a2a",
+                    "tertiary-fixed": "#ffdcbb",
+                    "on-tertiary-fixed-variant": "#673d00",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container-highest": "#353534",
+                    "on-tertiary": "#482900",
+                    "secondary-fixed": "#acedff",
+                    "on-error": "#690005",
+                    "tertiary-fixed-dim": "#ffb869",
+                    "outline-variant": "#494454",
+                    "outline": "#958ea0",
+                    "inverse-on-surface": "#313030",
+                    "on-primary-container": "#340080",
+                    "on-background": "#e5e2e1",
+                    "text-muted": "#A3A3A3",
+                    "error": "#ffb4ab",
+                    "glow-cyan": "rgba(6, 182, 212, 0.15)",
+                    "surface-variant": "#353534",
+                    "on-surface": "#e5e2e1",
+                    "glow-purple": "rgba(139, 92, 246, 0.15)",
+                    "on-tertiary-fixed": "#2c1700",
+                    "on-secondary-container": "#00424e",
+                    "on-error-container": "#ffdad6",
+                    "surface": "#131313",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed-dim": "#d0bcff",
+                    "on-primary-fixed": "#23005c",
+                    "border-subtle": "#262626",
+                    "on-primary-fixed-variant": "#5516be",
+                    "on-secondary-fixed": "#001f26",
+                    "on-secondary": "#003640",
+                    "surface-dim": "#131313",
+                    "secondary-fixed-dim": "#4cd7f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "base": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Geist"],
+                    "display-lg-mobile": ["Geist"],
+                    "body-lg": ["Geist"],
+                    "display-lg": ["Geist"],
+                    "body-md": ["Geist"],
+                    "headline-md": ["Geist"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "display-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "headline-md": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.02em", "fontWeight": "600"}]
+            },
+            "boxShadow": {
+                "glow-purple": "0 0 40px -10px rgba(139, 92, 246, 0.3)",
+                "glow-cyan": "0 0 40px -10px rgba(6, 182, 212, 0.3)"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(18, 18, 18, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .primary-gradient {
+            background: linear-gradient(90deg, #d0bcff 0%, #4cd7f6 100%);
+        }
+        .mesh-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 40%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .top-light-border {
+            position: relative;
+        }
+        .top-light-border::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(208, 188, 255, 0.4), transparent);
+        }
+    </style>
+</head>
+<body class="dark selection:bg-primary/30">
+<div class="mesh-bg"></div>
+<!-- Navigation Shell -->
+<nav class="fixed top-0 w-full z-50 bg-background/60 backdrop-blur-xl border-b border-white/10 shadow-glow-purple">
+<div class="flex justify-between items-center h-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<span class="font-headline-md text-headline-md font-bold text-text-high-contrast tracking-tighter">TalkGenius</span>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-body-md text-body-md text-text-muted hover:text-text-high-contrast transition-colors" href="#">Features</a>
+<a class="font-body-md text-body-md text-primary font-bold border-b-2 border-primary pb-1" href="#">Pricing</a>
+</div>
+<button class="primary-gradient text-on-primary-container px-6 py-2.5 rounded-full font-label-sm text-label-sm font-bold active:scale-95 transition-all shadow-glow-cyan">
+                Download for Desktop
+            </button>
+</div>
+</nav>
+<main class="pt-32 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Header -->
+<header class="text-center mb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+<div class="inline-flex items-center px-4 py-1.5 rounded-full glass border border-white/10 mb-6">
+<span class="material-symbols-outlined text-secondary text-sm mr-2" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest">AI Revolution</span>
+</div>
+<h1 class="font-display-lg-mobile md:text-display-lg font-display-lg text-text-high-contrast mb-6 max-w-4xl mx-auto leading-tight">
+                Investimento para sua próxima conquista
+            </h1>
+<p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto">
+                Desbloqueie o poder da IA em tempo real para suas entrevistas. Escolha o plano que melhor se adapta à sua ambição.
+            </p>
+</header>
+<!-- Pricing Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-4xl mx-auto mb-32">
+<!-- Weekly Plan -->
+<div class="glass-card p-10 rounded-xl relative overflow-hidden group hover:border-white/20 transition-all duration-500">
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-purple-500/10 blur-3xl group-hover:bg-purple-500/20 transition-colors"></div>
+<h3 class="font-headline-md text-headline-md text-text-high-contrast mb-2">Weekly</h3>
+<p class="font-body-md text-body-md text-text-muted mb-8">Ideal para preparação intensiva de curto prazo.</p>
+<div class="flex items-baseline mb-8">
+<span class="font-display-lg-mobile text-text-high-contrast">R$ 59,90</span>
+<span class="font-body-md text-text-muted ml-2">/semana</span>
+</div>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Acesso total às ferramentas de IA
+                    </li>
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Transcrição em tempo real ilimitada
+                    </li>
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-primary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Suporte técnico prioritário
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-xl border border-border-subtle font-label-sm text-label-sm font-bold text-text-high-contrast hover:bg-white/5 transition-all">
+                    Começar agora
+                </button>
+</div>
+<!-- Monthly Plan (Most Popular) -->
+<div class="glass-card p-10 rounded-xl relative overflow-hidden border-primary/30 group hover:border-primary/50 transition-all duration-500 scale-105 shadow-glow-purple">
+<div class="absolute top-0 right-0">
+<div class="bg-primary px-4 py-1 text-on-primary font-label-sm text-label-sm font-bold rounded-bl-xl">
+                        Most Popular
+                    </div>
+</div>
+<div class="absolute -top-24 -right-24 w-48 h-48 bg-cyan-500/10 blur-3xl group-hover:bg-cyan-500/20 transition-colors"></div>
+<h3 class="font-headline-md text-headline-md text-text-high-contrast mb-2">Monthly</h3>
+<p class="font-body-md text-body-md text-text-muted mb-8">O melhor custo-benefício para quem busca excelência.</p>
+<div class="flex items-baseline mb-8">
+<span class="font-display-lg-mobile text-text-high-contrast">R$ 99,00</span>
+<span class="font-body-md text-text-muted ml-2">/mês</span>
+</div>
+<ul class="space-y-4 mb-10">
+<li class="flex items-center font-body-md text-body-md text-text-high-contrast">
+<span class="material-symbols-outlined text-secondary mr-3" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        Tudo do plano semanal
+                    </li>
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-secondary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Análise de performance pós-entrevista
+                    </li>
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-secondary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Biblioteca de respostas otimizadas
+                    </li>
+<li class="flex items-center font-body-md text-body-md text-text-muted">
+<span class="material-symbols-outlined text-secondary mr-3" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        Economia de mais de 50%
+                    </li>
+</ul>
+<button class="w-full py-4 rounded-xl primary-gradient font-label-sm text-label-sm font-bold text-on-primary-container shadow-glow-cyan active:scale-[0.98] transition-all">
+                    Garantir desconto
+                </button>
+</div>
+</div>
+<!-- FAQ Section -->
+<section class="max-w-3xl mx-auto">
+<h2 class="font-headline-md text-headline-md text-text-high-contrast text-center mb-12">Perguntas Frequentes</h2>
+<div class="space-y-4">
+<!-- FAQ Item 1 -->
+<div class="glass-card rounded-xl p-6 top-light-border cursor-pointer transition-all hover:bg-white/5" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-lg text-body-lg text-text-high-contrast font-bold">Posso usar em mais de um computador?</h4>
+<span class="material-symbols-outlined text-text-muted transition-transform duration-300">expand_more</span>
+</div>
+<div class="faq-content hidden mt-4 overflow-hidden">
+<p class="font-body-md text-body-md text-text-muted">
+                            Para garantir a segurança e a integridade da nossa inteligência, as licenças do TalkGenius são limitadas a 1 computador por usuário. Você pode transferir sua licença uma vez a cada 30 dias se trocar de máquina.
+                        </p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="glass-card rounded-xl p-6 top-light-border cursor-pointer transition-all hover:bg-white/5" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-lg text-body-lg text-text-high-contrast font-bold">Quais as reais capacidades da IA?</h4>
+<span class="material-symbols-outlined text-text-muted transition-transform duration-300">expand_more</span>
+</div>
+<div class="faq-content hidden mt-4 overflow-hidden">
+<p class="font-body-md text-body-md text-text-muted">
+                            Nossa IA utiliza modelos avançados de NLP (Processamento de Linguagem Natural) para ouvir, transcrever e sugerir respostas otimizadas em tempo real. Ela analisa o contexto da pergunta do recrutador e busca em sua base de dados as melhores práticas para destacar suas habilidades.
+                        </p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="glass-card rounded-xl p-6 top-light-border cursor-pointer transition-all hover:bg-white/5" onclick="toggleFaq(this)">
+<div class="flex justify-between items-center">
+<h4 class="font-body-lg text-body-lg text-text-high-contrast font-bold">O software é detectável em chamadas de vídeo?</h4>
+<span class="material-symbols-outlined text-text-muted transition-transform duration-300">expand_more</span>
+</div>
+<div class="faq-content hidden mt-4 overflow-hidden">
+<p class="font-body-md text-body-md text-text-muted">
+                            O TalkGenius opera como um overlay transparente e captura o áudio do sistema de forma não intrusiva. Ele não se integra diretamente ao software de vídeo (Zoom, Meet, Teams), agindo como uma camada assistiva privada em sua área de trabalho.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Shell -->
+<footer class="w-full py-12 bg-surface-dim border-t border-border-subtle mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto items-center">
+<div>
+<span class="font-headline-md text-headline-md font-bold text-text-high-contrast">TalkGenius</span>
+<p class="font-label-sm text-label-sm text-text-muted mt-2">© 2024 TalkGenius AI. Limited to 1 computer per user.</p>
+</div>
+<div class="flex flex-col md:items-center space-y-2">
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-secondary transition-colors" href="#">Contact Support</a>
+</div>
+<div class="flex justify-start md:justify-end space-x-6">
+<a class="text-text-muted hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">
+<span class="material-symbols-outlined">alternate_email</span>
+</a>
+<a class="text-text-muted hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">
+<span class="material-symbols-outlined">forum</span>
+</a>
+<a class="text-text-muted hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+</footer>
+<script>
+        function toggleFaq(element) {
+            const content = element.querySelector('.faq-content');
+            const icon = element.querySelector('.material-symbols-outlined');
+            
+            const isHidden = content.classList.contains('hidden');
+            
+            // Close all others
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.material-symbols-outlined').forEach(i => i.classList.remove('rotate-180'));
+            
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // Micro-interaction for cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>
